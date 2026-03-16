@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.matuleclothes.Navigation
 import com.example.matuleclothes.R
@@ -24,10 +25,15 @@ import com.example.uikit.Presentation.White
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(navController: NavController, vm: SplashVM = hiltViewModel()) {
+    val state = vm.state.value
     LaunchedEffect(key1 = null) {
         delay(1500)
-        navController.navigate(Navigation.SingIn)
+        if(state.token.isNotEmpty()){
+            navController.navigate(Navigation.Main)
+        } else{
+            navController.navigate(Navigation.SingIn)
+        }
     }
     Box(
         modifier = Modifier
