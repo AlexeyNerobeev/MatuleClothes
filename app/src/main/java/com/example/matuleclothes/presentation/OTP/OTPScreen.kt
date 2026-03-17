@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.matuleclothes.Navigation
 import com.example.matuleclothes.presentation.OTP.common.OTPTFData
 import com.example.uikit.Presentation.Black
 import com.example.uikit.Presentation.Buttons.Bubble.BackButton
@@ -37,19 +39,27 @@ fun OTPScreen(navController: NavController, vm: OTPVM = hiltViewModel()) {
         OTPTFData(
             modifier = Modifier,
             value = state.secondNumber,
-            onValueChange = { vm.onEvent(OTPEvent.EnteredSecondNumber(it))}
+            onValueChange = { vm.onEvent(OTPEvent.EnteredSecondNumber(it))
+            vm.onEvent(OTPEvent.IsAllFieldsFilled)}
         ),
         OTPTFData(
             modifier = Modifier,
             value = state.thirdNumber,
-            onValueChange = { vm.onEvent(OTPEvent.EnteredThirdNumber(it))}
+            onValueChange = { vm.onEvent(OTPEvent.EnteredThirdNumber(it))
+                vm.onEvent(OTPEvent.IsAllFieldsFilled)}
         ),
         OTPTFData(
             modifier = Modifier,
             value = state.fourthNumber,
-            onValueChange = { vm.onEvent(OTPEvent.EnteredFourthNumber(it))}
+            onValueChange = { vm.onEvent(OTPEvent.EnteredFourthNumber(it))
+                vm.onEvent(OTPEvent.IsAllFieldsFilled)}
         )
     )
+    LaunchedEffect(key1 = state.isAllFieldFilled) {
+        if(state.isAllFieldFilled){
+            navController.navigate(Navigation.CreatePassword)
+        }
+    }
     Scaffold(modifier = Modifier
         .fillMaxSize()){ innerPadding ->
         Column(modifier = Modifier

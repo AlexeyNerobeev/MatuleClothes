@@ -17,4 +17,7 @@ sealed class Navigation {
 
     @Serializable
     data object OTP: Navigation()
+
+    @Serializable
+    data object CreatePassword: Navigation()
 }

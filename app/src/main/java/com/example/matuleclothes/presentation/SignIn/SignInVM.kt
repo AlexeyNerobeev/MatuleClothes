@@ -74,50 +74,53 @@ class SignInVM @Inject constructor(
             SignInEvent.Login -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     try {
-                        val responseLogin = loginUseCase.invoke(
-                            identity = state.value.email,
-                            password = state.value.password
-                        )
-                        if (responseLogin.token.isNotEmpty()) {
-                            saveTokenUseCase.invoke(
-                                token = responseLogin.token,
-                                id = responseLogin.record.id
-                            )
-                            saveUserIdUseCase.invoke(responseLogin.record.id)
-                            saveEmailUseCase.invoke(state.value.email)
-                            _state.value = state.value.copy(
-                                isLogin = true
-                            )
-                        }
+                        login()
                     } catch (ex: Exception) {
                         Log.e("login", ex.message.toString())
                         try {
-                            if (isEmailValidUseCase.invoke(state.value.email) &&
-                                isPasswordValidUseCase.invoke(state.value.password)
-                            ) {
-                                val responseRegister = registerUseCase.invoke(
-                                    email = state.value.email,
-                                    password = state.value.password,
-                                    passwordConfirm = state.value.password
-                                )
-                                Log.i("responseRegister", responseRegister.id)
-                                if (responseRegister.id.isNotEmpty()) {
-                                    saveTokenUseCase.invoke(
-                                        token = "",
-                                        id = responseRegister.id
-                                    )
-                                    saveUserIdUseCase.invoke(responseRegister.id)
-                                    saveEmailUseCase.invoke(state.value.email)
-                                    _state.value = state.value.copy(
-                                        isRegister = true
-                                    )
-                                }
-                            }
+                            registration()
                         } catch (ex: Exception) {
                             Log.e("register", ex.message.toString())
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private suspend fun login(){
+        val responseLogin = loginUseCase.invoke(
+            identity = state.value.email,
+            password = state.value.password
+        )
+        if (responseLogin.token.isNotEmpty()) {
+            saveTokenUseCase.invoke(
+                token = responseLogin.token,
+                id = responseLogin.record.id
+            )
+            saveUserIdUseCase.invoke(responseLogin.record.id)
+            saveEmailUseCase.invoke(state.value.email)
+            _state.value = state.value.copy(
+                isLogin = true
+            )
+        }
+    }
+
+    private suspend fun registration(){
+        if (isEmailValidUseCase.invoke(state.value.email) &&
+            isPasswordValidUseCase.invoke(state.value.password)
+        ) {
+            val responseRegister = registerUseCase.invoke(
+                email = state.value.email,
+                password = state.value.password,
+                passwordConfirm = state.value.password
+            )
+            Log.i("responseRegister", responseRegister.id)
+            if (responseRegister.id.isNotEmpty()) {
+                login()
+                _state.value = state.value.copy(
+                    isRegister = true
+                )
             }
         }
     }

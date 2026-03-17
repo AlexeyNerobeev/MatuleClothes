@@ -35,6 +35,16 @@ class OTPVM @Inject constructor(
                     thirdNumber = event.value
                 )
             }
+            OTPEvent.IsAllFieldsFilled -> {
+                if (state.value.firstNumber.isNotEmpty() &&
+                    state.value.secondNumber.isNotEmpty() &&
+                    state.value.thirdNumber.isNotEmpty() &&
+                    state.value.fourthNumber.isNotEmpty()){
+                    _state.value = state.value.copy(
+                        isAllFieldFilled = true
+                    )
+                }
+            }
         }
     }
 }
