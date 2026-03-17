@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.matuleclothes.presentation.Catalog.CatalogScreen
 import com.example.matuleclothes.presentation.CreatePassword.CreatePasswordScreen
 import com.example.matuleclothes.presentation.CreateProfile.CreateProfileScreen
 import com.example.matuleclothes.presentation.Main.MainScreen
@@ -42,6 +43,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Navigation.CreatePassword> {
                         CreatePasswordScreen(navController)
+                    }
+                    composable<Navigation.Catalog> {
+                        CatalogScreen(navController)
                     }
                 }
             }

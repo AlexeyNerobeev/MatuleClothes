@@ -20,4 +20,7 @@ sealed class Navigation {
 
     @Serializable
     data object CreatePassword: Navigation()
+
+    @Serializable
+    data object Catalog: Navigation()
 }
