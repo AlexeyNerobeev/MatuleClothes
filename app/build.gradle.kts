@@ -50,7 +50,7 @@ dependencies {
     implementation("com.github.AlexeyNerobeev:uikit:1.0.0")
 
     //network
-    implementation("com.github.AlexeyNerobeev:NetworkLibrary:1.0.0")
+    implementation("com.github.AlexeyNerobeev:NetworkLibrary:1.0.2")
 
     //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)

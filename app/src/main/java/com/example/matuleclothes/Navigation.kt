@@ -8,4 +8,16 @@ sealed class Navigation {
 
     @Serializable
     data object SingIn: Navigation()
+
+    @Serializable
+    data object Main: Navigation()
+
+    @Serializable
+    data object CreateProfile: Navigation()
+
+    @Serializable
+    data object OTP: Navigation()
+
+    @Serializable
+    data object CreatePassword: Navigation()
 }
