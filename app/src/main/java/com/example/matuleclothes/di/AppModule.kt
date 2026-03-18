@@ -1,5 +1,6 @@
 package com.example.matuleclothes.di
 
+import com.example.matuleclothes.domain.model.Products
 import com.example.matuleclothes.domain.usecase.IsEmailValidUseCase
 import com.example.matuleclothes.domain.usecase.IsPasswordValidUseCase
 import dagger.Module
