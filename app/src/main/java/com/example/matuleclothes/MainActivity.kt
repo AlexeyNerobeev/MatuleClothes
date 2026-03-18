@@ -13,6 +13,7 @@ import com.example.matuleclothes.presentation.CreatePassword.CreatePasswordScree
 import com.example.matuleclothes.presentation.CreateProfile.CreateProfileScreen
 import com.example.matuleclothes.presentation.Main.MainScreen
 import com.example.matuleclothes.presentation.OTP.OTPScreen
+import com.example.matuleclothes.presentation.Projects.ProjectsScreen
 import com.example.matuleclothes.presentation.SignIn.SignInScreen
 import com.example.matuleclothes.presentation.Splash.SplashScreen
 import com.example.matuleclothes.ui.theme.MatuleClothesTheme
@@ -50,6 +51,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Navigation.Cart> {
                         CartScreen(navController)
+                    }
+                    composable<Navigation.Projects> {
+                        ProjectsScreen(navController)
                     }
                 }
             }

@@ -190,7 +190,7 @@ fun MainScreen(navController: NavController, vm: MainVM = hiltViewModel()) {
                     .padding(horizontal = 8.dp),
                 onFirstIconCLick = {},
                 onSecondIconCLick = {navController.navigate(Navigation.Catalog)},
-                onThirdIconCLick = {},
+                onThirdIconCLick = {navController.navigate(Navigation.Projects)},
                 onFourthIconCLick = {}
             )
         }

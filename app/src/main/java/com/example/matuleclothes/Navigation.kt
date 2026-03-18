@@ -26,4 +26,7 @@ sealed class Navigation {
 
     @Serializable
     data object Cart: Navigation()
+
+    @Serializable
+    data object Projects: Navigation()
 }
