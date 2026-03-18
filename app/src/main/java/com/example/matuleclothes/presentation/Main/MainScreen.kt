@@ -5,15 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -31,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.matuleclothes.Navigation
 import com.example.matuleclothes.R
-import com.example.matuleclothes.presentation.Main.common.ChipsButtonsData
+import com.example.matuleclothes.common.ChipsButtonsData
 import com.example.uikit.Presentation.Buttons.Chips.ChipActiveButton
 import com.example.uikit.Presentation.Buttons.Chips.ChipInactiveButton
 import com.example.uikit.Presentation.Cards.Primary
@@ -136,10 +133,7 @@ fun MainScreen(navController: NavController, vm: MainVM = hiltViewModel()) {
                 style = Theme.typography.title3Semibold,
                 modifier = Modifier
                     .padding(top = 32.dp)
-                    .padding(start = 21.dp)
-                    .clickable{
-                        navController.navigate(Navigation.Catalog)
-                    })
+                    .padding(start = 21.dp))
             LazyRow(modifier = Modifier
                 .padding(top = 15.dp)
                 .padding(start = 16.dp)
@@ -188,11 +182,12 @@ fun MainScreen(navController: NavController, vm: MainVM = hiltViewModel()) {
         }
         Box(modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize()
-            .padding(horizontal = 24.dp),
+            .fillMaxSize(),
             contentAlignment = Alignment.BottomCenter){
             TabBar(
                 currentScreenNumber = 1,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp),
                 onFirstIconCLick = {},
                 onSecondIconCLick = {navController.navigate(Navigation.Catalog)},
                 onThirdIconCLick = {},

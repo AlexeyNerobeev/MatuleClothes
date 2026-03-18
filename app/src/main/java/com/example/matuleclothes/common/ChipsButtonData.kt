@@ -1,4 +1,4 @@
-package com.example.matuleclothes.presentation.Main.common
+package com.example.matuleclothes.common
 
 import androidx.compose.ui.Modifier
 

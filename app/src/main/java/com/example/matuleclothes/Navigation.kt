@@ -23,4 +23,7 @@ sealed class Navigation {
 
     @Serializable
     data object Catalog: Navigation()
+
+    @Serializable
+    data object Cart: Navigation()
 }
