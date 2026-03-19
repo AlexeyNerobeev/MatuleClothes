@@ -47,7 +47,7 @@ android {
 dependencies {
 
     //uikit
-    implementation("com.github.AlexeyNerobeev:uikit:1.0.2")
+    implementation("com.github.AlexeyNerobeev:uikit:1.0.3")
 
     //network
     implementation("com.github.AlexeyNerobeev:NetworkLibrary:1.0.3")

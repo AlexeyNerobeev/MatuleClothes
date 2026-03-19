@@ -191,7 +191,7 @@ fun MainScreen(navController: NavController, vm: MainVM = hiltViewModel()) {
                 onFirstIconCLick = {},
                 onSecondIconCLick = {navController.navigate(Navigation.Catalog)},
                 onThirdIconCLick = {navController.navigate(Navigation.Projects)},
-                onFourthIconCLick = {}
+                onFourthIconCLick = {navController.navigate(Navigation.Profile)}
             )
         }
     }

@@ -7,12 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.matuleclothes.presentation.CreateProject.CreateProjectScreen
 import com.example.matuleclothes.presentation.Cart.CartScreen
 import com.example.matuleclothes.presentation.Catalog.CatalogScreen
 import com.example.matuleclothes.presentation.CreatePassword.CreatePasswordScreen
 import com.example.matuleclothes.presentation.CreateProfile.CreateProfileScreen
 import com.example.matuleclothes.presentation.Main.MainScreen
 import com.example.matuleclothes.presentation.OTP.OTPScreen
+import com.example.matuleclothes.presentation.Profile.ProfileScreen
 import com.example.matuleclothes.presentation.Projects.ProjectsScreen
 import com.example.matuleclothes.presentation.SignIn.SignInScreen
 import com.example.matuleclothes.presentation.Splash.SplashScreen
@@ -54,6 +56,12 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Navigation.Projects> {
                         ProjectsScreen(navController)
+                    }
+                    composable<Navigation.CreateProject> {
+                        CreateProjectScreen(navController)
+                    }
+                    composable<Navigation.Profile> {
+                        ProfileScreen(navController)
                     }
                 }
             }

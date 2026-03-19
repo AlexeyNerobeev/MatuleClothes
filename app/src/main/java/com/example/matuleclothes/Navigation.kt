@@ -29,4 +29,10 @@ sealed class Navigation {
 
     @Serializable
     data object Projects: Navigation()
+
+    @Serializable
+    data object CreateProject: Navigation()
+
+    @Serializable
+    data object Profile: Navigation()
 }

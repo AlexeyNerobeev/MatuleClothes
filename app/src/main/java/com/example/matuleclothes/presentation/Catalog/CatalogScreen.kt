@@ -177,9 +177,9 @@ fun CatalogScreen(navController: NavController, vm: CatalogVM = hiltViewModel())
                     modifier = Modifier
                         .padding(horizontal = 8.dp),
                     onFirstIconCLick = { navController.navigate(Navigation.Main) },
-                    onSecondIconCLick = {navController.navigate(Navigation.Projects)},
-                    onThirdIconCLick = {},
-                    onFourthIconCLick = {}
+                    onSecondIconCLick = {},
+                    onThirdIconCLick = {navController.navigate(Navigation.Projects)},
+                    onFourthIconCLick = {navController.navigate(Navigation.Profile)}
                 )
             }
         }

@@ -2,6 +2,8 @@ package com.example.matuleclothes.presentation.Projects
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,50 +72,56 @@ fun ProjectsScreen(navController: NavController, vm: ProjectsVM = hiltViewModel(
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                     )
-                    IconButton(
-                        onClick = {
-
-                        },
+                    Icon(
+                        painter = painterResource(com.example.uikit.R.drawable.icon_plus),
+                        contentDescription = null,
+                        tint = InputIcon,
                         modifier = Modifier
-                            .align(Alignment.TopEnd)
-                            .padding(top = 4.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(com.example.uikit.R.drawable.icon_plus),
-                            contentDescription = null,
-                            tint = InputIcon
-                        )
-                    }
+                            .align(Alignment.CenterEnd)
+                            .clickable(interactionSource = MutableInteractionSource()) {
+                                ripple()
+                                navController.navigate(Navigation.CreateProject)
+                            }
+                    )
                 }
                 LazyColumn(
                     modifier = Modifier
                         .padding(top = 36.dp)
                         .fillMaxWidth()
                 ) {
-                    items(state.projectsList){
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(min = 136.dp)
-                            .background(
-                                color = White,
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                            .border(
-                                1.dp, color = CardStroke,
-                                shape = RoundedCornerShape(12.dp)
-                            )){
-                            Column(modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxWidth()) {
-                                Text(text = it.title,
+                    items(state.projectsList) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 136.dp)
+                                .background(
+                                    color = White,
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                                .border(
+                                    1.dp, color = CardStroke,
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = it.title,
                                     style = Theme.typography.headlineMedium,
-                                    color = Black)
-                                Row(modifier = Modifier
-                                    .padding(top = 44.dp)
-                                    .fillMaxWidth(),
+                                    color = Black
+                                )
+                                Row(
+                                    modifier = Modifier
+                                        .padding(top = 44.dp)
+                                        .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically) {
-                                    Text(text = "Прошло ${it.dateStart} дня",
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "Прошло ${it.dateStart} дня",
                                         style = Theme.typography.captionSemibold,
                                         color = Placeholder
                                     )
@@ -123,25 +132,31 @@ fun ProjectsScreen(navController: NavController, vm: ProjectsVM = hiltViewModel(
                                 }
                             }
                         }
+                        Spacer(
+                            modifier = Modifier
+                                .height(15.dp)
+                        )
                     }
-                    item{
+                    item {
                         Spacer(modifier = Modifier.height(100.dp))
                     }
                 }
             }
         }
-        Box(modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter){
+        Box(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
             TabBar(
                 currentScreenNumber = 3,
                 modifier = Modifier
                     .padding(horizontal = 8.dp),
-                onFirstIconCLick = {navController.navigate(Navigation.Main)},
-                onSecondIconCLick = {navController.navigate(Navigation.Catalog)},
+                onFirstIconCLick = { navController.navigate(Navigation.Main) },
+                onSecondIconCLick = { navController.navigate(Navigation.Catalog) },
                 onThirdIconCLick = {},
-                onFourthIconCLick = {}
+                onFourthIconCLick = {navController.navigate(Navigation.Profile)}
             )
         }
     }
