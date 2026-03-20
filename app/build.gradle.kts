@@ -46,6 +46,13 @@ android {
 
 dependencies {
 
+    //room
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    //виджеты
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+
     //uikit
     implementation("com.github.AlexeyNerobeev:uikit:1.0.3")
 

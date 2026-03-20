@@ -6,6 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.matuleclothes.domain.model.Products
+import com.example.matuleclothes.domain.usecase.LoadCachedProductsUseCase
+import com.example.matuleclothes.domain.usecase.SaveProductsUseCase
+import com.example.matuleclothes.domain.usecase.SendNotificationUseCase
 import com.example.network.domain.usecase.CreateCartUseCase
 import com.example.network.domain.usecase.GetProductsUseCase
 import com.example.network.domain.usecase.LoadUserIdUseCase
@@ -16,13 +19,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainVM @Inject constructor(
-    private val getProductsUseCase: GetProductsUseCase
+    private val getProductsUseCase: GetProductsUseCase,
+    private val sendNotificationUseCase: SendNotificationUseCase,
+    private val saveProductsUseCase: SaveProductsUseCase,
+    private val loadCachedProductsUseCase: LoadCachedProductsUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(MainState())
     val state: State<MainState> = _state
 
     init {
+        sendNotificationUseCase.invoke("main", "main")
         viewModelScope.launch(Dispatchers.IO) {
+            loadProducts()
             try {
                 val productsList = getProductsUseCase.invoke(
                     filterField = "id",
@@ -34,6 +42,7 @@ class MainVM @Inject constructor(
                         Products(name = it.title, price = it.price)
                     }
                 )
+                saveProducts()
             } catch (ex: Exception){
                 Log.e("server", ex.message.toString())
             }
@@ -134,5 +143,33 @@ class MainVM @Inject constructor(
                     inCart = false)
             }
         )
+    }
+
+    private suspend fun saveProducts(){
+        try {
+            val products = getProductsUseCase.invoke("id", "").items.map {
+                Products(
+                    id = it.id,
+                    name = it.title,
+                    price = it.price,
+                    type = it.type,
+                    inCart = false
+                )
+            }
+            saveProductsUseCase.invoke(products)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private suspend fun loadProducts(){
+        try {
+            val products = loadCachedProductsUseCase.invoke()
+            _state.value = state.value.copy(
+                catalog = products
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
