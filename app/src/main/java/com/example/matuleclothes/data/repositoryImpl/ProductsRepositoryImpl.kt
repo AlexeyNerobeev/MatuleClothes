@@ -16,4 +16,8 @@ class ProductsRepositoryImpl(
     override suspend fun getProducts(): List<Products> {
         return productsDao.getProducts().map { it.toModel() }
     }
+
+    override suspend fun loadFilterProducts(filter: String): List<Products> {
+        return productsDao.getFilterProducts(filter).map { it.toModel() }
+    }
 }

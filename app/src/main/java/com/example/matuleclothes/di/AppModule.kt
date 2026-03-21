@@ -10,6 +10,7 @@ import com.example.matuleclothes.domain.repository.ProductsRepository
 import com.example.matuleclothes.domain.usecase.IsEmailValidUseCase
 import com.example.matuleclothes.domain.usecase.IsPasswordValidUseCase
 import com.example.matuleclothes.domain.usecase.LoadCachedProductsUseCase
+import com.example.matuleclothes.domain.usecase.LoadFilterCachedProductsUseCase
 import com.example.matuleclothes.domain.usecase.SaveProductsUseCase
 import com.example.matuleclothes.domain.usecase.SendNotificationUseCase
 import dagger.Module
@@ -66,5 +67,10 @@ class AppModule {
     @Provides
     fun provideLoadCachedProductsUseCase(productsRepository: ProductsRepository): LoadCachedProductsUseCase{
         return LoadCachedProductsUseCase(productsRepository)
+    }
+
+    @Provides
+    fun provideLoadFilterCachedProductsUseCase(productsRepository: ProductsRepository): LoadFilterCachedProductsUseCase{
+        return LoadFilterCachedProductsUseCase(productsRepository)
     }
 }
